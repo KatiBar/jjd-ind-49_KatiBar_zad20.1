@@ -1,0 +1,32 @@
+* {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+div {
+    text-align: center;
+}
+
+input,
+button {
+    border-radius: 5px;
+    border: 2px solid black;
+    align-content: center;
+    text-align: center;
+}
+
+input {
+    width: 20%;
+}
+
+button {
+    background-color: blue;
+    color: white;
+    width: 60%;
+}
+
+[id="err"],
+[id="success"] {
+    padding-left: 100px;
+    padding-top: 100px;
+}
