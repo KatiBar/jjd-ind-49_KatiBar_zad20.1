@@ -1,10 +1,7 @@
 package pl.javastart.jjdind49_katibar_zad20_1;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,16 +14,15 @@ public class UserController {
         this.usersRepo = usersRepo;
     }
 
-    @RequestMapping("/repo")
-    public String startPOST(@RequestParam String firstName, @RequestParam String lastName, @RequestParam Integer age) {
-        if (firstName != null) {
+    @PostMapping("/form")
+    public String addUserWithPostMethod(@RequestParam String firstName, @RequestParam String lastName, @RequestParam Integer age) {
+        if (!firstName.isEmpty()) {
             createNewUser(firstName, lastName, age);
             return "redirect:/success.html";
         } else {
             return "redirect:/err.html";
         }
     }
-
     @RequestMapping("/users")
     @ResponseBody
     public String showUsers() {
@@ -39,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/add")
-    public String startGET(@RequestParam(value = "imie", required = false) String firstName,
+    public String addUserWithGetMethod(@RequestParam(value = "imie", required = false) String firstName,
                            @RequestParam("nazwisko") String lastName,
                            @RequestParam("wiek") Integer age) {
         if (firstName != null) {
