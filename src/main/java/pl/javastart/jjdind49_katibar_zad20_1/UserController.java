@@ -14,13 +14,16 @@ public class UserController {
         this.usersRepo = usersRepo;
     }
 
-    @PostMapping("/form")
-    public String addUserWithPostMethod(@RequestParam String firstName, @RequestParam String lastName, @RequestParam Integer age) {
-        if (!firstName.isEmpty()) {
+    @RequestMapping(value = "/add", method = {RequestMethod.POST, RequestMethod.GET})
+    public String addUser(@RequestParam (value = "imie", required = false) String firstName,
+                                        @RequestParam (value = "nazwisko", required = false) String lastName,
+                                        @RequestParam (value = "wiek", required = false) Integer age) {
+
+        if (firstName == null) {
+            return "redirect:/err.html";
+        } else {
             createNewUser(firstName, lastName, age);
             return "redirect:/success.html";
-        } else {
-            return "redirect:/err.html";
         }
     }
     @RequestMapping("/users")
@@ -34,17 +37,6 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/add")
-    public String addUserWithGetMethod(@RequestParam(value = "imie", required = false) String firstName,
-                           @RequestParam("nazwisko") String lastName,
-                           @RequestParam("wiek") Integer age) {
-        if (firstName != null) {
-            createNewUser(firstName, lastName, age);
-            return "/success.html";
-        } else {
-            return "/err.html";
-        }
-    }
 
     private void createNewUser(String firstName, String lastName, Integer age) {
         User user = new User(firstName, lastName, age);

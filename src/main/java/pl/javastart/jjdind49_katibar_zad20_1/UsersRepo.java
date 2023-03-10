@@ -10,6 +10,12 @@ public class UsersRepo {
 
     private final List<User> userList = new ArrayList<>();
 
+    public UsersRepo() {
+        userList.add(new User("Artur","Nowak", 20));
+        userList.add(new User("Anna", "Wesołowska", 54));
+        userList.add(new User("Wronika", "Bauer", 28));
+    }
+
     public List<User> getUserList() {
         return userList;
     }
